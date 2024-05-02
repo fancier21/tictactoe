@@ -60,24 +60,26 @@ function App() {
     ? `Winner: ${winner}`
     : `Next player: ${isXNext ? 'X' : 'O'}`;
 
+  function renderBoardRows() {
+    let rows = [];
+    for (let i = 0; i < 3; i++) {
+      let cols = [];
+      for (let j = 0; j < 3; j++) {
+        cols.push(rederSquare(i * 3 + j));
+      }
+      rows.push(
+        <div key={i} className="board-row">
+          {cols}
+        </div>
+      );
+    }
+    return rows;
+  }
+
   return (
     <div className="board">
       <div className={`status ${winner ? 'winner' : ''}`}>{result}</div>
-      <div className="board-row">
-        {rederSquare(0)}
-        {rederSquare(1)}
-        {rederSquare(2)}
-      </div>
-      <div className="board-row">
-        {rederSquare(3)}
-        {rederSquare(4)}
-        {rederSquare(5)}
-      </div>
-      <div className="board-row">
-        {rederSquare(6)}
-        {rederSquare(7)}
-        {rederSquare(8)}
-      </div>
+      {renderBoardRows()}
       <button onClick={startNewGame} className="new-game">Start New Game</button>
     </div>
   );
